@@ -2,7 +2,7 @@
 * A practice project made with springboot. 
 * I have a single customer api with all CRUD operations.
 * I have used mysql as my database.
-* I have used junit 5 with mockito for testing.
+* I have used junit 5 with mockito,mockmvc and rest template for testing.
 
 
 How to run the project:
