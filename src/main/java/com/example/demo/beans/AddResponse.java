@@ -5,6 +5,13 @@ public class AddResponse {
 	String message;
 	int id;
 	
+    public AddResponse(int id,String m) {
+	this.id = id;
+	this.message = m;
+	}
+   
+    public AddResponse(){}
+	
 	public String getMessage() {
 		return message;
 	}

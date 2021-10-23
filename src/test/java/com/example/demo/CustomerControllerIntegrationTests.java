@@ -26,15 +26,27 @@ public class CustomerControllerIntegrationTests {
 	String expected="[\n"
 			+ "    {\n"
 			+ "        \"id\": 1,\n"
-			+ "        \"phoneNumber\": 12345,\n"
+			+ "        \"phoneNumber\": 2134,\n"
 			+ "        \"customerName\": \"Reshail\",\n"
-			+ "        \"customerAddress\": \"Bahadurabad\"\n"
+			+ "        \"customerAddress\": \"karachi\"\n"
 			+ "    },\n"
 			+ "    {\n"
 			+ "        \"id\": 2,\n"
-			+ "        \"phoneNumber\": 3345,\n"
-			+ "        \"customerName\": \"Rebail\",\n"
-			+ "        \"customerAddress\": \"Gulshan\"\n"
+			+ "        \"phoneNumber\": 22445,\n"
+			+ "        \"customerName\": \"John Doe\",\n"
+			+ "        \"customerAddress\": \"Lahore\"\n"
+			+ "    },\n"
+			+ "    {\n"
+			+ "        \"id\": 3,\n"
+			+ "        \"phoneNumber\": 334456,\n"
+			+ "        \"customerName\": \"David \",\n"
+			+ "        \"customerAddress\": \"islamabad\"\n"
+			+ "    },\n"
+			+ "    {\n"
+			+ "        \"id\": 4,\n"
+			+ "        \"phoneNumber\": 929304,\n"
+			+ "        \"customerName\": \"Rizwan\",\n"
+			+ "        \"customerAddress\": \"Multan\"\n"
 			+ "    }\n"
 			+ "]"; //Have this as part of resources 
 	 
@@ -58,11 +70,11 @@ public class CustomerControllerIntegrationTests {
 	public void test_getcustomerbyid() {
 		
 		String data ="{\n"
-				+ "    \"id\": 1,\n"
-				+ "    \"phoneNumber\": 12345,\n"
-				+ "    \"customerName\": \"Reshail\",\n"
-				+ "    \"customerAddress\": \"Bahadurabad\"\n"
-				+ "}";
+					+ "    \"id\": 1,\n"
+					+ "        \"phoneNumber\": 2134,\n"
+					+ "        \"customerName\": \"Reshail\",\n"
+					+ "        \"customerAddress\": \"karachi\"\n"
+					+ "}";
 		
 		
 		TestRestTemplate rest = new TestRestTemplate();
@@ -80,9 +92,9 @@ public class CustomerControllerIntegrationTests {
 		
 		String data ="{\n"
 				+ "    \"id\": 1,\n"
-				+ "    \"phoneNumber\": 12345,\n"
-				+ "    \"customerName\": \"Reshail\",\n"
-				+ "    \"customerAddress\": \"Bahadurabad\"\n"
+				+ "        \"phoneNumber\": 2134,\n"
+				+ "        \"customerName\": \"Reshail\",\n"
+				+ "        \"customerAddress\": \"karachi\"\n"
 				+ "}";
 		
 		
@@ -99,13 +111,13 @@ public class CustomerControllerIntegrationTests {
 	@Order(4)
 	public void test_addcustomer() {
 		
-		CustomerPojo newCustomer = new CustomerPojo(3,"Ubaid","Hill park",96993);
+		CustomerPojo newCustomer = new CustomerPojo(5,"Test user","Dubai",96993);
 		
 		String data ="{\n"
-				+ "    \"id\": 3,\n"
+				+ "    \"id\": 5,\n"
 				+ "    \"phoneNumber\": 96993,\n"
-				+ "    \"customerName\": \"Ubaid\",\n"
-				+ "    \"customerAddress\": \"Hill park\"\n"
+				+ "    \"customerName\": \"Test user\",\n"
+				+ "    \"customerAddress\": \"Dubai\"\n"
 				+ "}";
 		
 		TestRestTemplate rest = new TestRestTemplate();
@@ -127,13 +139,13 @@ public class CustomerControllerIntegrationTests {
 	@Test
 	@Order(5)
 	public void test_updatecustomer() {
-		CustomerPojo newCustomer = new CustomerPojo(3,"Ubaid Alavi","Hill park",96993);
+		CustomerPojo newCustomer = new CustomerPojo(5,"Test user updated","Turkey",96993);
 		
 		String data ="{\n"
-				+ "    \"id\": 3,\n"
+				+ "    \"id\": 5,\n"
 				+ "    \"phoneNumber\": 96993,\n"
-				+ "    \"customerName\": \"Ubaid Alavi\",\n"
-				+ "    \"customerAddress\": \"Hill park\"\n"
+				+ "    \"customerName\": \"Test user updated\",\n"
+				+ "    \"customerAddress\": \"Turkey\"\n"
 				+ "}";
 		
 		TestRestTemplate rest = new TestRestTemplate();
@@ -142,7 +154,7 @@ public class CustomerControllerIntegrationTests {
 		
 		HttpEntity<CustomerPojo> request = new HttpEntity<CustomerPojo>(newCustomer,headers);
 		
-		ResponseEntity<String> response=rest.exchange("http://localhost:8080/updatecustomer/3",HttpMethod.PUT,request,String.class);	
+		ResponseEntity<String> response=rest.exchange("http://localhost:8080/updatecustomer/5",HttpMethod.PUT,request,String.class);	
 		try {
 			assertEquals(HttpStatus.OK,response.getStatusCode());
 			JSONAssert.assertEquals(data,response.getBody(), false);
@@ -155,11 +167,11 @@ public class CustomerControllerIntegrationTests {
 	@Test
 	@Order(6)
 	public void test_deletecustomer() {
-		CustomerPojo newCustomer = new CustomerPojo(3,"Ubaid Alavi","Hill park",96993);
+		CustomerPojo newCustomer = new CustomerPojo(5,"Test user","Dubai",96993);
 		
 		String data ="{\n"
 				+ "    \"message\": \"Customer deleted successfully...\",\n"
-				+ "    \"id\": 3\n"
+				+ "    \"id\": 5\n"
 				+ "}";
 		
 		TestRestTemplate rest = new TestRestTemplate();
@@ -168,7 +180,7 @@ public class CustomerControllerIntegrationTests {
 		
 		HttpEntity<CustomerPojo> request = new HttpEntity<CustomerPojo>(newCustomer,headers);
 		
-		ResponseEntity<String> response=rest.exchange("http://localhost:8080/deletecustomer/3",HttpMethod.DELETE,request,String.class);	
+		ResponseEntity<String> response=rest.exchange("http://localhost:8080/deletecustomer/5",HttpMethod.DELETE,request,String.class);	
 		try {
 			assertEquals(HttpStatus.OK,response.getStatusCode());
 			JSONAssert.assertEquals(data,response.getBody(), false);

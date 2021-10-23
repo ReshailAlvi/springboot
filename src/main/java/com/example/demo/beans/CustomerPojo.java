@@ -22,7 +22,7 @@ public class CustomerPojo {
 	@Column(name="address")
 	String customerAddress;
 	
-	CustomerPojo(int i,String n,String a,int ph){
+	public CustomerPojo(int i,String n,String a,int ph){
 		this.id = i;
 		this.customerName = n;
 		this.customerAddress = a;
